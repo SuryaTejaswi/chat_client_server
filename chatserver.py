@@ -71,13 +71,13 @@ def main():
                             error_msg = "Error! Shouldn't use special characters in name".encode('ascii')
                             socket.sendall(error_msg.encode('ascii'))
                         elif received:
-                            ok = 'Ok!'
+                            ok = 'OK'
                             socket.sendall(ok.encode('ascii'))
                             perm_conns.append(socket)
                             perm_conns_dict[socket] = name
                             temp_conns.remove(socket)
                         else:
-                            socket.sendall('Error->BAD COMMAND OR MALFORMED COMMAND'.encode('ascii'))
+                            socket.sendall('ERROR no nick set'.encode('ascii'))
                     else:
                         socket.close()
                         conns.remove(socket)
@@ -99,7 +99,7 @@ def main():
                    #         print('msg sent')
                             broadcast(message_to_send, socket)
                         else:
-                            socket.sendall('Error! BAD COMMAND OR MALFORMED COMMAND'.encode('ascii'))
+                            socket.sendall('ERROR malformed command'.encode('ascii'))
                     else:
                         socket.close()
                         conns.remove(socket)

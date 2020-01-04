@@ -20,12 +20,14 @@ try:
     # connect to server
     client.connect((IP,PORT))
     hello = client.recv(1024).decode('ascii')
-    print(hello)
+    sys.stdout.write(hello)
+    sys.stdout.flush()
     # Send nick and receive ok!
-    nick = 'NICK '+NICK
+    nick = NICK + 'NICK '
     client.sendall(nick.encode('ascii'))
     ok = client.recv(1024).decode('ascii')
-    print(ok)
+    sys.stdout.write(ok)
+    sys.stdout.flush()
 except Exception as e:
     print("Not able to send the nick name data",e)
     sys.exit()
@@ -34,11 +36,18 @@ while True:
     readsockets, writesockets, errorsockets = select.select(sockets,[],[])
     for socket in sockets:
         if socket==client:
+            
             try:
                 msg = socket.recv(1024).decode('ascii')
-                print(msg[4:])
+                if msg[:3] == 'MSG':
+                    sys.stdout.write(msg[4:])
+                    sys.stdout.flush()
+                else:
+                    sys.stdout.write(msg)
+                    sys.stdout.flush()
             except Exception as e:
-                print(msg)
+                sys.stdout.write(msg)
+                sys.stdout.flush()
         else:
             msg = sys.stdin.readline()
             if msg=='\n':

@@ -4,54 +4,43 @@ import socket
 import re
 import select
 
-# Try the input
-try:
-    ARGS = str(sys.argv[1]).split(':')
-    IP = str(ARGS[0])
-    PORT = int(ARGS[1])
-    NICK = sys.argv[2]
-except:
-    print("Usage: python chat_client.py server_ip:server_port")
-    sys.exit()
+#try input
+args = str(sys.argv[1]).split(':')
+ip = str(args[0])
+port = int(args[1])
+nick = str(sys.argv[2])
 # Try protocol part 1 and protocol part 2
-try:
-    client = socket.socket()
+client = socket.socket()
+if len(sys.argv) != 3:
+    print("Usage: ./chatclient <server-ip>:<port-number> <nickname>")
+    sys.exit(1)
     # connect to server
-    client.connect((IP, PORT))
-    hello = client.recv(1024).decode('ascii')
-    sys.stdout.write(hello)
-    sys.stdout.flush()
-    # Send nick and receive ok!
-    nick = 'NICK ' + NICK
-    client.sendall(nick.encode('ascii'))
-    ok = client.recv(1024).decode('ascii')
-    sys.stdout.write(ok)
-    sys.stdout.flush()
-except Exception as e:
-    print("Not able to send the nick name data", e)
+
+client.connect((ip, port))
+hello = client.recv(1024).decode('ascii')
+print(hello)
+    # Send nick and receive ok
+client.sendall(('NICK '+ nick).encode('ascii'))
+ok = client.recv(1024).decode('ascii')
+if re.search('Error',ok) or re.search('ERROR', ok):
+    print(ok)
     sys.exit()
+print(ok)
 while True:
     sockets = [sys.stdin, client]
-    readsockets, writesockets, errorsockets = select.select(sockets, [], [])
-    for socket in sockets:
+    read_sockets, write_sockets, error_sockets = select.select(sockets, [], [])
+    for socket in read_sockets:
         if socket == client:
-
-            try:
-                msg = socket.recv(1024).decode('ascii')
-                if msg[:3] == 'MSG':
-                    sys.stdout.write(msg[4:])
-                    sys.stdout.flush()
-                else:
-                    sys.stdout.write(msg)
-                    sys.stdout.flush()
-            except:
-                sys.stdout.write(msg)
-                sys.stdout.flush()
+            msg = socket.recv(2048).decode('ascii')
+            if re.search(r'Error', msg) or re.search(r'ERROR', msg):
+                print(msg)
+            else:
+                print(msg[4:])  # error message
         else:
             msg = sys.stdin.readline()
             if msg == '\n':
                 continue
             else:
-                message_to_send = 'MSG ' + msg
-                client.sendall(message_to_send.encode('ascii'))
+                message_load = 'MSG ' + msg
+                client.sendall(message_load.encode('ascii'))
 client.close()

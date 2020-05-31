@@ -1,0 +1,47 @@
+commit f8c74190fd9792603141b8d9cfcc295329af7ebd
+Author: SuryaTejaswi <triparagirisuryatejaswi@gmail.com>
+Date:   Sun May 31 14:45:57 2020 +0200
+
+    Fix bugs
+
+commit 3cdb844adfda4305fafa14ab2e6b5de9b0e41a63
+Author: SuryaTejaswi <tejaswitriparagiri@gmail.com>
+Date:   Sun May 31 02:57:27 2020 +0200
+
+    Modify the server code to broadcast the messages
+
+commit 3d6a57a7cfb851831f4d31522eba874eb4aa5133
+Author: SuryaTejaswi <triparagirisuryatejaswi@gmail.com>
+Date:   Sun Jan 5 00:55:02 2020 +0100
+
+    chatclient modified
+
+commit 6d5e6065d860e970144ab200a0c926290a7587fc
+Author: SuryaTejaswi <triparagirisuryatejaswi@gmail.com>
+Date:   Thu Oct 24 02:23:06 2019 +0200
+
+    deleted
+
+commit 30e263fe9a5401f849d24f5183aaab76b0818ef7
+Author: SuryaTejaswi <triparagirisuryatejaswi@gmail.com>
+Date:   Thu Oct 24 02:19:12 2019 +0200
+
+    Changed filenames and error handling
+
+commit 59250a5240eafe3f666c2b8f6145e923f1eb73a7
+Author: SuryaTejaswi <triparagirisuryatejaswi@gmail.com>
+Date:   Thu Oct 24 02:15:03 2019 +0200
+
+    changed server name
+
+commit 87ef7951fa89cde43d03ea9e9fad526cf4dd1e6f
+Author: SuryaTejaswi <triparagirisuryatejaswi@gmail.com>
+Date:   Sun Oct 20 19:56:04 2019 +0200
+
+    Tested server ok
+
+commit 461aa287239ee9efbe6812d4793aa97caf3fcd16
+Author: SuryaTejaswi <triparagirisuryatejaswi@gmail.com>
+Date:   Sun Oct 20 19:54:42 2019 +0200
+
+    Tested client->ok!
